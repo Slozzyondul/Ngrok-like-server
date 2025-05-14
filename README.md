@@ -39,12 +39,12 @@ This project allows you to expose a local Flask app (or any local service) runni
 
 ### 1. 🔧 Install Python Packages
 
-```run in the bash terminal
+```run in the bash terminal```
 pip install -r requirements.txt
 
 ### 2. 🚀 Start Flask App (on the client machine)
 
-```run in the bash terminal
+```run in the bash terminal```
 FLASK_APP=app.py flask run --port=5000
 
 - Make sure Flask is running before you start the tunnel client.

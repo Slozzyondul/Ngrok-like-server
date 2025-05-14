@@ -12,3 +12,13 @@
 - [✅ Notes](#-notes)
 - [🙌 Credits](#-credits)
 - [🤝 Contributing](#-contributing)
+
+---
+
+# 🔥 Flask Tunnel System (Localhost to Public Port Forwarding)
+
+This project allows you to expose a local **Flask** app (or any local service) running on a private machine to the public via a custom TCP tunnel.
+
+---
+
+## 🧱 Project Structure

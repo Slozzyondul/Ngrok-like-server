@@ -22,3 +22,42 @@ This project allows you to expose a local **Flask** app (or any local service) r
 ---
 
 ## 🧱 Project Structure
+
+├── client/
+
+│ └── extended_client.py
+
+├── server/
+
+│ └── extended_server.py
+
+├── utils/
+
+│ └──  utils.py
+
+├── app.py
+ 
+├── requirements.txt
+
+└── README.md
+
+---
+
+## 💡 How It Works
+
+- The **server** listens on a public machine and waits for clients.
+- The **client** connects to the server and creates a tunnel (e.g., public:8080 → local:5000).
+- **Flask** runs on the client machine on port 5000.
+- Anyone accessing the server’s `:8080` port gets forwarded to the client’s local Flask app.
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. 🔧 Installation
+
+```bash
+git clone [https://github.com/Slozzyondul/Ngrok-like-server.git](https://github.com/Slozzyondul/Ngrok-like-server.git)
+cd Ngrok-like-server
+pip install -r requirements.txt
+

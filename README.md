@@ -25,3 +25,19 @@ This project allows you to expose a local Flask app (or any local service) runni
 ├── requirements.txt
 
 └── README.md
+
+
+## 💡 How It Works
+
+- The **server** listens on a public machine and waits for clients.
+- The **client** connects to the server and creates a tunnel (e.g., public:8080 → local:5000).
+- Flask runs on the client machine on port 5000.
+- Anyone accessing the server’s `:8080` port gets forwarded to the client’s local Flask app.
+
+
+## ⚙️ Setup
+
+### 1. 🔧 Install Python Packages
+
+```run in the bash terminal
+pip install -r requirements.txt

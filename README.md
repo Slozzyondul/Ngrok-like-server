@@ -78,3 +78,9 @@ This project allows you to expose a local Flask app (or any local service) runni
 ```curl http://localhost:8080```
 
 - You should see the response from the Flask app ("🔥 Tunnel is working!").
+
+### ✅ Notes
+
+- This is for development or demo use, not production.
+
+- Make sure firewall/ports (9000 and 8080) are open on the server.

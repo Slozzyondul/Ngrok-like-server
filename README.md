@@ -39,9 +39,9 @@ This project allows you to expose a local Flask app (or any local service) runni
 
 ### 1. 🔧 Install Python Packages
 
-    Run in the bash terminal
+    ```Run in the bash terminal```
 
-```pip install -r requirements.txt```
+pip install -r requirements.txt
 
 ### 2. 🚀 Start Flask App (on the client machine)
 

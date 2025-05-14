@@ -50,7 +50,6 @@ pip install -r requirements.txt
 
 ### 2. 🚀 Start Flask App (on the client machine)
 
-```bash
 
 FLASK_APP=app.py flask run --port=5000
 
@@ -85,3 +84,27 @@ curl http://localhost:8080
 - This is for development or demo use, not production.
 
 - Make sure firewall/ports (9000 and 8080) are open on the server.
+
+Uses AES-256 in EAX mode for authenticated encryption
+
+Each session generates unique encryption keys
+
+For production use:
+
+Add client authentication
+
+Implement rate limiting
+
+Use TLS for control channel
+
+### 🙌 Credits
+- Inspired by how Ngrok works — built from scratch with Python sockets and threads for devs who want full control.
+
+### 🤝 Contributing
+Pull requests welcome! Please:
+
+Fork the repository
+
+Create a feature branch
+
+Submit a PR with clear documentation

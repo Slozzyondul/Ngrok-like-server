@@ -61,3 +61,7 @@ git clone [https://github.com/Slozzyondul/Ngrok-like-server.git](https://github.
 cd Ngrok-like-server
 pip install -r requirements.txt
 
+---
+2. 🚀 Start Flask App (on the client machine)
+
+FLASK_APP=app.py flask run --port=5000

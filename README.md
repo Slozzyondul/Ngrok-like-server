@@ -1,27 +1,14 @@
-## Table of Contents
-
-- [🔥 Flask Tunnel System (Localhost to Public Port Forwarding)](#-flask-tunnel-system-localhost-to-public-port-forwarding)
-- [🧱 Project Structure](#project-structure)
-- [💡 How It Works](#️-how-it-works)
-- [⚙️ Setup Instructions](#️-setup-instructions)
-  - [1. 🔧 Installation](#1-%EF%A3%A9-installation)
-  - [2. 🚀 Start Flask App (on the client machine)](#2-%F0%9F%9A%80-start-flask-app-on-the-client-machine)
-  - [3. 🌐 Start Tunnel Server (on the public server)](#3-%F0%9F%8C%90-start-tunnel-server-on-the-public-server)
-  - [4. 📡 Start Tunnel Client (on the local machine)](#4-%F0%9F%93%9E-start-tunnel-client-on-the-local-machine)
-- [✅ Test the Tunnel](#-test-the-tunnel)
-- [✅ Notes](#-notes)
-- [🙌 Credits](#-credits)
-- [🤝 Contributing](#-contributing)
-
----
+# Ngrok-like-server
+Built for devs who need self-hosted ngrok-like power with 🔒 no middlemen.  
 
 # 🔥 Flask Tunnel System (Localhost to Public Port Forwarding)
 
-This project allows you to expose a local **Flask** app (or any local service) running on a private machine to the public via a custom TCP tunnel.
+This project allows you to expose a local Flask app (or any local service) running on a private machine to the public via a custom TCP tunnel.
 
 ---
 
 ## 🧱 Project Structure
+
 
 ├── client/
 
@@ -47,8 +34,28 @@ This project allows you to expose a local **Flask** app (or any local service) r
 
 - The **server** listens on a public machine and waits for clients.
 - The **client** connects to the server and creates a tunnel (e.g., public:8080 → local:5000).
-- **Flask** runs on the client machine on port 5000.
+- Flask runs on the client machine on port 5000.
 - Anyone accessing the server’s `:8080` port gets forwarded to the client’s local Flask app.
+
+---
+
+### ✅ Notes
+
+- This is for development or demo use, not production.
+
+- Make sure firewall/ports (9000 and 8080) are open on the server.
+
+Uses AES-256 in EAX mode for authenticated encryption
+
+Each session generates unique encryption keys
+
+For production use:
+
+Add client authentication
+
+Implement rate limiting
+
+Use TLS for control channel
 
 ---
 
@@ -56,12 +63,58 @@ This project allows you to expose a local **Flask** app (or any local service) r
 
 ### 1. 🔧 Installation
 
-```bash
-git clone [https://github.com/Slozzyondul/Ngrok-like-server.git](https://github.com/Slozzyondul/Ngrok-like-server.git)
+git clone https://github.com/Slozzyondul/Ngrok-like-server.git
+
 cd Ngrok-like-server
+
 pip install -r requirements.txt
 
 ---
-2. 🚀 Start Flask App (on the client machine)
+
+### 2. 🚀 Start Flask App (on the client machine)
 
 FLASK_APP=app.py flask run --port=5000
+
+- Make sure Flask is running before you start the tunnel client.
+
+---
+
+### 3. 🌐 Start Tunnel Server (on the public server)
+
+cd server
+
+python extended_server.py
+
+- This will listen on port 9000 for clients and forward connections from port 8080.
+
+---
+
+### 4. 📡 Start Tunnel Client (on the local machine)
+
+cd client
+
+python extended_client.py
+
+- The client registers with the server, and sets up a tunnel from public:8080 → local:5000.
+
+---
+
+### 5.
+
+###  ✅ Test the Tunnel
+
+- On the public server or any device with access to it:
+
+curl http://localhost:8080
+
+- Alternatively, in any browser run:
+
+http://<server-ip>:8080
+
+- You should see the response from the Flask app ("🔥 Tunnel is working!").
+
+---
+
+### 🙌 Credits
+- Inspired by how Ngrok works — built from scratch with Python sockets and threads for devs who want full control.
+

@@ -1,5 +1,3 @@
-
-
 import socket
 import threading
 import json
@@ -101,7 +99,7 @@ class TunnelServer:
                 print(f"[>] Connection on port {public_port} from {addr}")
                 threading.Thread(target=self.handle_forward_connection, args=(public_sock, client_id, local_port), daemon=True).start()
 
-   
+    
     def handle_forward_connection(self, public_socket, client_id, local_port):
         if client_id not in self.clients:
             print(f"[!] Client {client_id} not available")
@@ -109,11 +107,9 @@ class TunnelServer:
             return
 
         try:
-            client_sock = self.clients[client_id]
-            key = self.keys[client_id]
-            
-            # Verify socket is still connected
+            # Verify client socket is still connected
             try:
+                client_sock = self.clients[client_id]
                 client_sock.getpeername()
             except socket.error:
                 print(f"[!] Client socket {client_id} is closed")
@@ -121,15 +117,7 @@ class TunnelServer:
                 public_socket.close()
                 return
 
-            command = json.dumps({
-                "command": "forward",
-                "local_port": local_port
-            }).encode()
-
-            encrypted_cmd = encrypt_message(command, key)
-            client_sock.sendall(encrypted_cmd)
-
-            # Create new socket for forwarding
+            # Create new socket specifically for this forwarding connection
             forward_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             forward_sock.connect(('localhost', local_port))
 
@@ -143,32 +131,22 @@ class TunnelServer:
                 except Exception as e:
                     print(f"[>] Forwarding error: {e}")
                 finally:
-                    src.close()
-                    dst.close()
+                    try:
+                        src.close()
+                    except:
+                        pass
+                    try:
+                        dst.close()
+                    except:
+                        pass
 
-            threading.Thread(target=forward, args=(public_socket, forward_sock)).start()
-            threading.Thread(target=forward, args=(forward_sock, public_socket)).start()
+            # Start forwarding threads
+            threading.Thread(target=forward, args=(public_socket, forward_sock), daemon=True).start()
+            threading.Thread(target=forward, args=(forward_sock, public_socket), daemon=True).start()
 
         except Exception as e:
             print(f"[!] Forwarding setup failed: {e}")
             public_socket.close()
-            # Pipe data bidirectionally
-        def forward(src, dst):
-            try:
-                while True:
-                    data = src.recv(4096)
-                    if not data:
-                        break
-                    dst.sendall(data)
-            except Exception as e:
-                print(f"[!] Forward error: {e}")
-            finally:
-                src.close()
-                dst.close()
-
-        threading.Thread(target=forward, args=(public_socket, client_sock), daemon=True).start()
-        threading.Thread(target=forward, args=(client_sock, public_socket), daemon=True).start()
-
-
+    
 if __name__ == "__main__":
     TunnelServer().start()

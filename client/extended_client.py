@@ -63,14 +63,51 @@ class TunnelClient:
         finally:
             local_sock.close()
 
+    # def handle_forward(self, local_port):
+    #     try:
+    #         local_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    #         local_sock.connect(('localhost', local_port))
+    #         print(f"[>] Connected to local service on port {local_port}")
+
+    #         threading.Thread(target=self.pipe, args=(self.socket, local_sock), daemon=True).start()
+    #         threading.Thread(target=self.pipe, args=(local_sock, self.socket), daemon=True).start()
+    #     except Exception as e:
+    #         print(f"[!] Local connect failed: {e}")
+
     def handle_forward(self, local_port):
         try:
-            local_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            local_sock.connect(('localhost', local_port))
+            # Create a new socket for each forwarding connection
+            forward_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            forward_sock.connect(('localhost', local_port))
             print(f"[>] Connected to local service on port {local_port}")
 
-            threading.Thread(target=self.pipe, args=(self.socket, local_sock), daemon=True).start()
-            threading.Thread(target=self.pipe, args=(local_sock, self.socket), daemon=True).start()
+            # Create new socket for server communication
+            server_conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            server_conn.connect((self.server_ip, self.server_port))
+            server_conn.sendall(self.client_id.encode())
+
+            def forward(src, dst):
+                try:
+                    while True:
+                        data = src.recv(4096)
+                        if not data:
+                            break
+                        dst.sendall(data)
+                except Exception as e:
+                    print(f"[>] Forwarding error: {e}")
+                finally:
+                    try:
+                        src.close()
+                    except:
+                        pass
+                    try:
+                        dst.close()
+                    except:
+                        pass
+
+            threading.Thread(target=forward, args=(server_conn, forward_sock), daemon=True).start()
+            threading.Thread(target=forward, args=(forward_sock, server_conn), daemon=True).start()
+
         except Exception as e:
             print(f"[!] Local connect failed: {e}")
 

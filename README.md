@@ -99,9 +99,7 @@ python extended_client.py
 
 ---
 
-### 5.
-
-###  ✅ Test the Tunnel
+### 5. ✅ Test the Tunnel
 
 - On the public server or any device with access to it:
 

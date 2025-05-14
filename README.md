@@ -36,24 +36,21 @@ This project allows you to expose a local Flask app (or any local service) runni
 
 ## ⚙️ Setup Instructions
 
+```bash
+
 ### 1. 🔧 Install Dependencies
 
 On both the **client** and **server** machines:
 
-```bash
 pip install -r requirements.txt
 
 ### 2. 🚀 Start Flask App (on the client machine)
-
-    Run in the bash terminal
 
 ```FLASK_APP=app.py flask run --port=5000```
 
 - Make sure Flask is running before you start the tunnel client.
 
 ### 3. 🌐 Start Tunnel Server (on the public server)
-
-    Run in the bash terminal
 
 ```cd server```
 
@@ -62,8 +59,6 @@ pip install -r requirements.txt
 - This will listen on port 9000 for clients and forward connections from port 8080.
 
 ### 4. 📡 Start Tunnel Client (on the local machine)
-
-    Run in the bash terminal
 
 ```cd client```
 
@@ -74,8 +69,6 @@ pip install -r requirements.txt
 ###  ✅ Test the Tunnel
 
 - On the public server or any device with access to it:
-
-    Run in the bash terminal
 
 ```curl http://localhost:8080```
 

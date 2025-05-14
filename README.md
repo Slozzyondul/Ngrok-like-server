@@ -36,33 +36,39 @@ This project allows you to expose a local Flask app (or any local service) runni
 
 ## ⚙️ Setup Instructions
 
+
+
+### 1. 🔧 Installation
+
 ```bash
 
-### 1. 🔧 Install Dependencies
+git clone https://github.com/Slozzyondul/Ngrok-like-server.git
 
-On both the **client** and **server** machines:
+cd Ngrok-like-server
 
 pip install -r requirements.txt
 
 ### 2. 🚀 Start Flask App (on the client machine)
 
-```FLASK_APP=app.py flask run --port=5000```
+```bash
+
+FLASK_APP=app.py flask run --port=5000
 
 - Make sure Flask is running before you start the tunnel client.
 
 ### 3. 🌐 Start Tunnel Server (on the public server)
 
-```cd server```
+cd server
 
-```python extended_server.py```
+python extended_server.py
 
 - This will listen on port 9000 for clients and forward connections from port 8080.
 
 ### 4. 📡 Start Tunnel Client (on the local machine)
 
-```cd client```
+cd client
 
-```python extended_client.py```
+python extended_client.py
 
 - The client registers with the server, and sets up a tunnel from public:8080 → local:5000.
 
@@ -70,7 +76,7 @@ pip install -r requirements.txt
 
 - On the public server or any device with access to it:
 
-```curl http://localhost:8080```
+curl http://localhost:8080
 
 - You should see the response from the Flask app ("🔥 Tunnel is working!").
 

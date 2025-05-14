@@ -75,6 +75,6 @@ This project allows you to expose a local Flask app (or any local service) runni
 
     Run in the bash terminal
 
-```curl http://localhost:8080``
+```curl http://localhost:8080```
 
 - You should see the response from the Flask app ("🔥 Tunnel is working!").

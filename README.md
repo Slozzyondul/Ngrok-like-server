@@ -70,3 +70,11 @@ This project allows you to expose a local Flask app (or any local service) runni
 - The client registers with the server, and sets up a tunnel from public:8080 → local:5000.
 
 ###  ✅ Test the Tunnel
+
+- On the public server or any device with access to it:
+
+    Run in the bash terminal
+
+```curl http://localhost:8080``
+
+- You should see the response from the Flask app ("🔥 Tunnel is working!").

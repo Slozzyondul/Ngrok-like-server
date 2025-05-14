@@ -34,12 +34,14 @@ This project allows you to expose a local Flask app (or any local service) runni
 - Flask runs on the client machine on port 5000.
 - Anyone accessing the server’s `:8080` port gets forwarded to the client’s local Flask app.
 
+## ⚙️ Setup Instructions
 
-## ⚙️ Setup
+### 1. 🔧 Install Dependencies
 
-### 1. 🔧 Install Python Packages
+On both the **client** and **server** machines:
 
-```pip install -r requirements.txt```
+```bash
+pip install -r requirements.txt
 
 ### 2. 🚀 Start Flask App (on the client machine)
 

@@ -107,7 +107,7 @@ curl http://localhost:8080
 
 - Alternatively, in any browser run:
 
-http://<server-ip>:8080
+http://(your-server-ip):8080
 
 - You should see the response from the Flask app ("🔥 Tunnel is working!").
 

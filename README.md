@@ -47,7 +47,7 @@ This project allows you to expose a local Flask app (or any local service) runni
 
 ```FLASK_APP=app.py flask run --port=5000```
 
-    - Make sure Flask is running before you start the tunnel client.
+- Make sure Flask is running before you start the tunnel client.
 
 ### 3. 🌐 Start Tunnel Server (on the public server)
 
@@ -57,7 +57,7 @@ This project allows you to expose a local Flask app (or any local service) runni
 
 ```python extended_server.py```
 
-    - This will listen on port 9000 for clients and forward connections from port 8080.
+- This will listen on port 9000 for clients and forward connections from port 8080.
 
 ### 4. 📡 Start Tunnel Client (on the local machine)
 
@@ -67,5 +67,6 @@ This project allows you to expose a local Flask app (or any local service) runni
 
 ```python extended_client.py```
 
-    - The client registers with the server, and sets up a tunnel from public:8080 → local:5000.
+- The client registers with the server, and sets up a tunnel from public:8080 → local:5000.
 
+###  ✅ Test the Tunnel

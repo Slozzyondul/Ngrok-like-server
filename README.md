@@ -7,12 +7,21 @@ This project allows you to expose a local Flask app (or any local service) runni
 
 ## 🧱 Project Structure
 
-.
+
 ├── client/
+
 │ └── extended_client.py
+
 ├── server/
+
 │ └── extended_server.py
-├── test2/
-│ └── test_app.py
+
+├── utils/
+
+│ utils.py
+
+├── app.py
+│ 
 ├── requirements.txt
+
 └── README.md

@@ -21,7 +21,7 @@ This project allows you to expose a local Flask app (or any local service) runni
 │ utils.py
 
 ├── app.py
-│ 
+ 
 ├── requirements.txt
 
 └── README.md

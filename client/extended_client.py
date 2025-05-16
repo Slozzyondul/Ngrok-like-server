@@ -63,17 +63,7 @@ class TunnelClient:
         finally:
             local_sock.close()
 
-    # def handle_forward(self, local_port):
-    #     try:
-    #         local_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    #         local_sock.connect(('localhost', local_port))
-    #         print(f"[>] Connected to local service on port {local_port}")
-
-    #         threading.Thread(target=self.pipe, args=(self.socket, local_sock), daemon=True).start()
-    #         threading.Thread(target=self.pipe, args=(local_sock, self.socket), daemon=True).start()
-    #     except Exception as e:
-    #         print(f"[!] Local connect failed: {e}")
-
+   
     def handle_forward(self, local_port):
         try:
             # Create a new socket for each forwarding connection
@@ -177,6 +167,9 @@ if __name__ == "__main__":
 
     # Create tunnel from server:8080 → client:5000
     client.register_tunnel(8080, 5000)
+    
+    #flutter testing
+    client.register_tunnel(8081, 5001)
 
     # Keep the main thread alive
     import time
